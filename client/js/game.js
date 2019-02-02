@@ -73,10 +73,10 @@ return;
 				await speak("total");
 				await vo.speakWait(this.cats);
 				const items=[];
-if (this.rsc>0) 				items.push(new AudioItem("esc",sl+"next"));
 				for (let i=1;i<=this.cats;i++) {
 					items.push(new AudioItem(i,"g_cat_"+utils.randomInt(1,this.csnd)));
 				}
+				if (this.rsc>0) 				items.push(new AudioItem("esc",sl+"next"));
 				let cam=new Menu(sl+"choose",items);
 				cam.silent=true;
 				opt=await cam.runSync();

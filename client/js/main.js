@@ -25,13 +25,6 @@ vo.prepend="speaker_"+lang+"_num_";
 vo.and=false;
 if (lang==2) vo.and=true;
 export async function setup() {
-	await vo.speakWait(11120);
-	await speak("points");
-	await speak("level");
-	await vo.speakWait(0);
-	vo.speak(1000);
-	speak("points");
-	return;
 	//the below is an example of a new version notifier. The version2 variable can be used and compared inside a menu or wherever, and would contain the new version of your game based on what your server returns.
 	let prom=new Promise((resolve,reject)=> {
 			try {
