@@ -1,5 +1,16 @@
+import "babel-polyfill";
 'use strict';
 class GameUtils {
+	calculateDelta(lx, sx, sr = 0) {
+		sx = sx + sr;
+		if (sx < lx) {
+			delta = lx - sx;
+		}
+		if (sx > lx) {
+			delta = sx - lx;
+		}
+
+	}
 	progressPan(current, max) {
 		return ((current * 200 / max) - 100) / 100;
 	}
@@ -12,6 +23,7 @@ class GameUtils {
 		if (current > max) {
 			return 0;
 		}
+
 		return (current / (min + max)) * (maxVolume - minVolume) + minVolume;
 	}
 
@@ -19,13 +31,14 @@ class GameUtils {
 		if (current > max) {
 			return 0;
 		}
+
 		return (current / (min + max)) * (maxVolume - minVolume) + minVolume;
 	}
 
 	distance3D(x1, y1, z1, x2, y2, z2) {
 		return Math.sqrt((x2 - x1) * (x2 - x1) +
-				(y2 - y1) * (y2 - y1) +
-				(z2 - z1) * (z2 - z1));
+			(y2 - y1) * (y2 - y1) +
+			(z2 - z1) * (z2 - z1));
 	}
 
 	distance(jx, jy, kx, ky) {
@@ -63,6 +76,9 @@ class GameUtils {
 	percentOf(int1, int2) {
 		return int2 * int1 / 100;
 	}
+	percentage(percented, value) {
+		return value * percented / 100;
+	}
 
 	average(arr, startIndex = 0) {
 		const len = arr.length;
@@ -71,9 +87,11 @@ class GameUtils {
 		if (arr.length < startIndex) {
 			return -1;
 		}
+
 		for (let i = startIndex; i < arr.length; i++) {
 			val += arr[i];
 		}
+
 		average = val / (len - startIndex);
 		return average;
 	}
@@ -85,9 +103,11 @@ class GameUtils {
 		if (arr.length < startIndex) {
 			return -1;
 		}
+
 		for (let i = startIndex; i < arr.length; i++) {
 			val += arr[i];
 		}
+
 		average = val / (len - startIndex);
 		return Math.floor(average);
 	}
@@ -105,6 +125,7 @@ class GameUtils {
 			const j = Math.floor(Math.random() * (i + 1));
 			[a[i], a[j]] = [a[j], a[i]];
 		}
+
 		return a;
 	}
 
@@ -117,7 +138,35 @@ class GameUtils {
 				size++;
 			}
 		}
+
 		return size;
 	}
+	copyObject(obj) {
+		return Object.assign(Object.create(Object.getPrototypeOf(obj)), obj);
+	}
+	arraysEqual(arr1, arr2) {
+		for (var i = 0; i < arr1.length; i++) {
+
+			if (arr1[i] !== arr2[i])
+				return false;
+
+		}
+
+		return true;
+	}
+
+	pauseTimeout(timerId) {
+		let start = Date.now();
+		clearTimeout(timerId);
+	};
+
+	resumeTimeout(timerId) {
+		remaining -= Date.now() - start;
+		return window.setTimeout(callback, remaining);
+	};
+	randomProperty(obj) {
+		var keys = Object.keys(obj)
+		return obj[keys[keys.length * Math.random() << 0]];
+	};
 }
 export var utils = new GameUtils();
