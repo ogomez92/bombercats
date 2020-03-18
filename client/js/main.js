@@ -61,17 +61,14 @@ export async function setup() {
 
 	let mainMenu = new Menu(sl + "menu_intro", items);
 	let o = await mainMenu.runSync();
-	music.sound.fade(music.volume, 0, 800);
-	music.sound.once("fade", () => {
-		music.destroy();
-		if (o == "s") {
-			startGame(1);
-		}
-		if (o == "a") {
-			startGame(2);
-		}
-
-	});
+	await music.fade(800);
+	music.destroy();
+	if (o == "s") {
+		startGame(1);
+	}
+	if (o == "a") {
+		startGame(2);
+	}
 }
 function startGame(md) {
 	let game = new Game();
